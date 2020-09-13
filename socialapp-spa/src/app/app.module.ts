@@ -4,11 +4,15 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ValueComponent } from './value/value.component';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
-      ValueComponent
+      ValueComponent,
+      HomeComponent,
+      RegisterComponent
    ],
   imports: [
     BrowserModule,
