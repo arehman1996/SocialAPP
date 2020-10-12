@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService} from '../_services/auth.service';
 
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -8,6 +9,7 @@ import { AuthService} from '../_services/auth.service';
 })
 export class NavComponent implements OnInit {
   model: any = {};
+
   constructor(private authService: AuthService, private alertify: AlertifyService) { }
 
   ngOnInit() {

@@ -22,11 +22,11 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [
-    //AuthService,
-    ErrorInterceptorProvider
+    AuthService,
+    ErrorInterceptorProvider,
   ],
   bootstrap: [AppComponent]
 })
