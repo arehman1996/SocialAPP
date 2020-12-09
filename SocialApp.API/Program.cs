@@ -2,7 +2,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+//using Microsoft.Extensions.Hosting;
 using SocialApp.API.Data;
 using System;
 using Microsoft.Extensions.Logging;
@@ -29,6 +29,7 @@ namespace SocialApp.API
                     logger.LogError(ex, "An error occured during migration");
                 }
             }
+            host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
