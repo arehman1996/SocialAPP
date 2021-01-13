@@ -44,6 +44,7 @@ namespace SocialApp.API
             });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
+            services.Configure<CloudinarySettings>(Configuration.GetSection("CloudinarySettings"));
             services.AddAutoMapper(typeof(SocialRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<ISocialRepository, SocialRepository>();
@@ -93,6 +94,9 @@ namespace SocialApp.API
             app.UseAuthentication();
 
             app.UseAuthorization();
+
+            //may need to remove app use mvc
+            //app.UseMvc();
 
             
             

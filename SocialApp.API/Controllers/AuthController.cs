@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using SocialApp.API.Data;
 using SocialApp.API.Dtos;
 using SocialApp.API.Models;
+using AutoMapper;
 
 namespace SocialApp.API.Controllers
 {
@@ -20,8 +21,10 @@ namespace SocialApp.API.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        private readonly IMapper _mapper;
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
+            _mapper = mapper;
             _config = config;
             _repo = repo;
 
@@ -82,9 +85,12 @@ namespace SocialApp.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            var user = _mapper.Map<UserForListDto>(userFromRepo);
+
             return Ok(new 
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                user 
 
             });
             } 

@@ -15,6 +15,7 @@ export class MemberEditComponent implements OnInit {
   // tslint:disable-next-line: whitespace
   @ViewChild('editForm', {static:true}) editForm: NgForm;
   user: User;
+  photoUrl: string;
   @HostListener('window:beforeunload', ['$event'])
   // tslint:disable-next-line: typedef
   unloadNotification($event: any)
@@ -27,6 +28,7 @@ export class MemberEditComponent implements OnInit {
 
 
   constructor(private route: ActivatedRoute, private alertify: AlertifyService,
+    // tslint:disable-next-line: align
     private userService: UserService, private authService: AuthService) { }
 
   // tslint:disable-next-line: typedef
@@ -34,6 +36,7 @@ export class MemberEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.user = data['user'];
     });
+    this.authService.currentPhotoUrl.subscribe(photoUrl => this.photoUrl = photoUrl);
   }
 
   // tslint:disable-next-line: typedef
@@ -45,6 +48,10 @@ export class MemberEditComponent implements OnInit {
       this.alertify.error(error);
     });
 
+  }
+
+  updateMainPhoto(photoUrl) {
+    this.user.photoUrl = photoUrl;
   }
 
 }
