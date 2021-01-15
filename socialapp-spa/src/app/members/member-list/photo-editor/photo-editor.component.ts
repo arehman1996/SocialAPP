@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/_services/auth.service';
 import { UserService } from 'src/app/_services/user.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
-//import { EventEmitter } from 'events';
+// import { EventEmitter } from 'events';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class PhotoEditorComponent implements OnInit {
 
 
   constructor(private authService: AuthService, private userService: UserService,
-    private alertify: AlertifyService) { }
+              private alertify: AlertifyService) { }
 
   // tslint:disable-next-line: typedef
   ngOnInit() {
@@ -61,10 +61,16 @@ export class PhotoEditorComponent implements OnInit {
           isMain: res.isMain
         };
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.authService.changeMemberPhoto(photo.url);
+          this.authService.currentUser.photoUrl = photo.url;
+          localStorage.setItem('user', JSON.stringify(this.authService.currentUser));
+        }
       }
     };
   }
 
+  // tslint:disable-next-line: typedef
   setMainPhoto(photo: Photo) {
     this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(() => {
       this.currentMain = this.photos.filter(p => p.isMain === true)[0];
@@ -78,6 +84,7 @@ export class PhotoEditorComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line: typedef
   deletePhoto(id: number) {
     this.alertify.confirm('Are you sure you want to delete this photo', () => {
       this.userService.deletePhoto(this.authService.decodedToken.nameid, id).subscribe(() => {
