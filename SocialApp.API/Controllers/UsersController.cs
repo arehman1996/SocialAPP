@@ -1,16 +1,18 @@
-using SocialApp.API.Data;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using AutoMapper;
-using SocialApp.API.Dtos;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System;
+using System.Threading.Tasks;
+using AutoMapper;
+using SocialApp.API.Data;
+using SocialApp.API.Dtos;
+using SocialApp.API.Helpers;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace SocialApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
