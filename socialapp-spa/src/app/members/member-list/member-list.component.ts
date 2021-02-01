@@ -20,6 +20,7 @@ export class MemberListComponent implements OnInit {
 
   constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
+  // tslint:disable-next-line: typedef
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.users = data['users'].result;
@@ -37,6 +38,7 @@ export class MemberListComponent implements OnInit {
     this.loadUsers();
   }
 
+  // tslint:disable-next-line: typedef
   resetFilter() {
     this.userParams.gender = this.user.gender === 'female' ? 'male' : 'female';
     this.userParams.minAge = 18;
@@ -44,6 +46,7 @@ export class MemberListComponent implements OnInit {
     this.loadUsers();
   }
 
+  // tslint:disable-next-line: typedef
   loadUsers(){
      this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams )
      .subscribe((res: PaginatedResult<User[]>) => {
