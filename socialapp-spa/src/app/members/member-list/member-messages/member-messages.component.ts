@@ -29,6 +29,7 @@ export class MemberMessagesComponent implements OnInit {
     this.userService.getMessageThread(this.authService.decodedToken.nameid, this.recipientId)
     .pipe(
       tap(messages => {
+        // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < messages.length; i++) {
           if (messages[i].isRead === false && messages[i].recipientId === currentUserId) {
             this.userService.markAsRead(currentUserId, messages[i].id);
@@ -43,6 +44,7 @@ export class MemberMessagesComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line: typedef
   sendMessage() {
     this.newMessage.recipientId = this.recipientId;
     this.userService.sendMessage(this.authService.decodedToken.nameid, this.newMessage)

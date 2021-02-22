@@ -89,21 +89,27 @@ namespace SocialApp.API
 
             app.UseRouting();
             
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
             app.UseAuthentication();
 
             app.UseAuthorization();
 
-            //may need to remove app use mvc
-            //app.UseMvc();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapSpaFallbackRoute(
+            //        name: "spa-fallback",
+            //        defaults: new {controller = "Fallback", action = "Index"}
+            //    );
+            //});
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
